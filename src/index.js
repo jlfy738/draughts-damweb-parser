@@ -1,4 +1,4 @@
-var DamWeb = require('./DamWeb');
+var DamWebParser = require('./DamWebParser');
 
-window.DamWeb = DamWeb;
+window.DamWebParser = DamWebParser;
 

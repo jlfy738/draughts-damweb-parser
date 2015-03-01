@@ -1,1 +1,1 @@
-module.exports = exports = require('./DamWeb');
+module.exports = exports = require('./DamWebParser');

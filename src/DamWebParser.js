@@ -1,4 +1,4 @@
-function DamWeb(position, notation) {
+function DamWebParser(position, notation) {
     this.wpList = [];
     this.wkList = [];
     this.bpList = [];
@@ -12,38 +12,38 @@ function DamWeb(position, notation) {
     this.setNotation(notation);
 }
 
-DamWeb.prototype.setPosition = function(position) {
+DamWebParser.prototype.setPosition = function(position) {
     this.textPosition = position ? position : "";
 };
 
-DamWeb.prototype.setNotation = function(notation) {
+DamWebParser.prototype.setNotation = function(notation) {
     this.textNotation = notation ? notation : "";
 };
 
-DamWeb.prototype.getWPList = function() { return this.wpList; };
+DamWebParser.prototype.getWPList = function() { return this.wpList; };
 
-DamWeb.prototype.getWKList = function() { return this.wkList; };
+DamWebParser.prototype.getWKList = function() { return this.wkList; };
 
-DamWeb.prototype.getBPList = function() { return this.bpList; };
+DamWebParser.prototype.getBPList = function() { return this.bpList; };
 
-DamWeb.prototype.getBKList = function() { return this.bkList; };
+DamWebParser.prototype.getBKList = function() { return this.bkList; };
 
-DamWeb.prototype.getMoveList = function() { return this.moveList; };
-
-
+DamWebParser.prototype.getMoveList = function() { return this.moveList; };
 
 
-DamWeb.prototype.parse = function() {
-    var wp = DamWeb._getPositionWP(this.textPosition);
-    var wk = DamWeb._getPositionWK(this.textPosition);
-    var bp = DamWeb._getPositionBP(this.textPosition);
-    var bk = DamWeb._getPositionBK(this.textPosition);
 
 
-    this.wpList = DamWeb._positionToList(wp);
-    this.wkList = DamWeb._positionToList(wk);
-    this.bpList = DamWeb._positionToList(bp);
-    this.bkList = DamWeb._positionToList(bk);
+DamWebParser.prototype.parse = function() {
+    var wp = DamWebParser._getPositionWP(this.textPosition);
+    var wk = DamWebParser._getPositionWK(this.textPosition);
+    var bp = DamWebParser._getPositionBP(this.textPosition);
+    var bk = DamWebParser._getPositionBK(this.textPosition);
+
+
+    this.wpList = DamWebParser._positionToList(wp);
+    this.wkList = DamWebParser._positionToList(wk);
+    this.bpList = DamWebParser._positionToList(bp);
+    this.bkList = DamWebParser._positionToList(bk);
 
 
     if (this.textNotation) {
@@ -65,7 +65,7 @@ DamWeb.prototype.parse = function() {
 };
 
 
-DamWeb._positionToList = function(s) {
+DamWebParser._positionToList = function(s) {
     var list = [];
 
     if (s) {
@@ -84,27 +84,27 @@ DamWeb._positionToList = function(s) {
     return list;
 };
 
-DamWeb._getPositionWP = function(text) {
+DamWebParser._getPositionWP = function(text) {
     var pattern = /[BW]M.*?WP(.*?)(?:WK|BP|BK|$).*/;
     return this._extractSubString(text, pattern);
 };
 
-DamWeb._getPositionBP = function(text) {
+DamWebParser._getPositionBP = function(text) {
     var pattern = /[BW]M.*?BP(.*?)(?:WP|WK|BK|$).*/;
     return this._extractSubString(text, pattern);
 };
 
-DamWeb._getPositionWK = function(text) {
+DamWebParser._getPositionWK = function(text) {
     var pattern = /[BW]M.*?WK(.*?)(?:WP|BP|BK|$).*/;
     return this._extractSubString(text, pattern);
 };
 
-DamWeb._getPositionBK = function(text) {
+DamWebParser._getPositionBK = function(text) {
     var pattern = /[BW]M.*?BK(.*?)(?:WP|BP|WK|$).*/;
     return this._extractSubString(text, pattern);
 };
 
-DamWeb._extractSubString = function(text, pattern) {
+DamWebParser._extractSubString = function(text, pattern) {
     var s = "";
 
     var m = text.match(pattern);
@@ -114,4 +114,4 @@ DamWeb._extractSubString = function(text, pattern) {
     return s;
 };
 
-module.exports = DamWeb;
+module.exports = DamWebParser;
